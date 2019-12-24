@@ -1,3 +1,2 @@
-# bowling-game
-
-```yarn && jest ```
+# Example TDD Repo
+`yarn && ./node_modules/.bin/jest`
