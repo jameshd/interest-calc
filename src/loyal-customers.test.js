@@ -1,4 +1,4 @@
-import BankAccount from "./bank-account";
+import { calculateInterest } from "./bank-account";
 describe("Loyal Customers", () => {
   [
     {
@@ -23,11 +23,9 @@ describe("Loyal Customers", () => {
     }
   ].forEach(criteria => {
     test(`customers with tenure of ${criteria.customerTenure} years and balance of ${criteria.balance} get double interest`, () => {
-      const bankAccount = new BankAccount(
-        criteria.balance,
-        criteria.customerTenure
+      expect(calculateInterest(criteria.balance, criteria.customerTenure)).toBe(
+        criteria.expected
       );
-      expect(bankAccount.calculateInterest()).toBe(criteria.expected);
     });
   });
 });

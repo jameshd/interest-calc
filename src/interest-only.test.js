@@ -1,4 +1,4 @@
-import BankAccount from "./bank-account";
+import { calculateInterest } from "./bank-account";
 
 describe("Bank Interest Rates", () => {
   [
@@ -24,8 +24,7 @@ describe("Bank Interest Rates", () => {
     }
   ].forEach(criteria => {
     it(`calculates expected interest on blanace of ${criteria.balance} correctly`, () => {
-      const bankAccount = new BankAccount(criteria.balance);
-      expect(bankAccount.calculateInterest()).toBe(criteria.expected);
+      expect(calculateInterest(criteria.balance)).toBe(criteria.expected);
     });
   });
 });

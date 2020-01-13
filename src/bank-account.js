@@ -1,41 +1,22 @@
 import { BASIC_RATE, MID_RATE, HIGH_RATE } from "./interest-rates";
 
-export default class BankAccount {
-  constructor(balance, customerTenure = 0) {
-    this.balance = balance;
-    this.customerTenure = customerTenure;
+export const calculateInterest = (balance, customerTenure) => {
+  const isLoyalCustomer = customerTenure >= 5;
+  let rate = BASIC_RATE;
+
+  if (balance == 0) return 0;
+
+  if (balance > 0 && balance <= 1000) {
+    rate = BASIC_RATE;
   }
 
-  isLoyalCustomer() {
-    return this.customerTenure >= 5;
+  if (balance > 1000 && balance <= 5000) {
+    rate = MID_RATE;
   }
 
-  doubleInterestRate(balance, rate) {
-      return balance * (rate * 2);
+  if (balance > 5000) {
+    rate = HIGH_RATE;
   }
 
-  calculateInterest() {
-    if (this.balance > 0 && this.balance <= 1000) {
-      if (this.isLoyalCustomer()) {
-        return this.doubleInterestRate(this.balance, BASIC_RATE);
-      }
-      return this.balance * BASIC_RATE;
-    }
-
-    if (this.balance > 1000 && this.balance <= 5000) {
-      if (this.isLoyalCustomer()) {
-        return this.doubleInterestRate(this.balance, MID_RATE);
-      }
-      return this.balance * MID_RATE;
-    }
-
-    if (this.balance > 5000) {
-      if (this.isLoyalCustomer()) {
-        return this.doubleInterestRate(this.balance, HIGH_RATE);
-      }
-      return this.balance * HIGH_RATE;
-    }
-
-    return 0;
-  }
-}
+  return isLoyalCustomer ? balance * (rate * 2) : balance * rate;
+};
